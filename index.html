@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #ticket-editor-root {
+            position:absolute;
+            width:100%;
+            height:100%;
+        }
+        #ticket-left-pane {
+            position:absolute;
+            width:600px;
+            height:600px;
+            left:0px;
+            top:0px;
+        }
+        #ticket-display-pane {
+            background-color: palegoldenrod;
+        }
+        #ticket-example-controls-pane {
+            position:absolute;
+            width:50%;
+            height:600px;
+            left:600px;
+            top:0px;
+            background-color: aliceblue;
+        }
+        #ticket-pane {
+            grid-column-start: 0;
+            grid-column-end: 4;
+            grid-row-start: 1;
+            grid-row-end: 1;
+            background-color:azure;
+        }
+        #ticket-box {
+            position:absolute;
+            width:100%;
+            top:600px;
+            background-color: antiquewhite;
+        }
+        /* width */
+        ::-webkit-scrollbar {
+            width: 20px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px grey;
+            border-radius: 10px;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: red;
+            border-radius: 10px;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #b30000;
+        }
+
+        #ticket-example-controls-pane {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            grid-gap: 16px;
+        }
+
+        label {
+            grid-column: 1/2;
+        }
+
+        input,
+        button {
+            grid-column: 2/3;
+        }
+        span {
+            color: red;
+            font-style: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="ticked-editor-root">
+        <div id="ticket-left-pane">
+            <svg id="ticket-display-pane" x="0" y="0" width="600" height="250"></svg>
+        </div>
+        <div id="ticket-example-controls-pane">
+            <label>Destination:</label>
+            <input id="destinationTextField" type="text" value="Austria" oninput="updateTicket()">
+
+            <label>Carrier:</label>
+            <input id="carrierTextField" type="text" value="Eurail" oninput="updateTicket()">
+            
+            <label>Travel Mode:</label>
+            <select id="travel-mode-select" onchange="updateTicket()">
+                <option value="Air">Air</option>
+                <option value="Rail">Rail</option>
+                <option value="Sea">Sea</option>
+            </select>
+
+            <label>Seat:</label>
+            <select id="seat-select" onchange="updateTicket()">
+                <option value="Regions">Regions</option>
+                <option value="Capitals">Capitals</option>
+                <option value="Leaders">Leaders</option>
+                <option value="Flags">Flags</option>
+                <option value="Landmarks">Landmarks</option>
+            </select>
+
+            <label>Departure Date:</label>
+            <input id="departureDatePicker" type="date" defaultValue="2022-3-18" oninput="updateTicket()">
+
+            <label>Departure Time:</label>
+            <input id="departureTimePicker" type="time" defaultValue="12:00" oninput="updateTicket()">
+
+            <label>Duration:</label>
+            <input id="durationTimePicker" type="time" defaultValue="2022-3-18" oninput="updateTicket()">
+
+            <label>Grade:</label>
+            <select id="grade-select" onchange="updateTicket()">
+                <option value="S">S</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="F">F</option>
+            </select>
+
+            <label>Score:</label>
+            <div>1<input id="scoreSlider" oninput="updateTicket()" type="range" min="1" max="100" value="80">100</div>
+
+            <label>Stroke Color:</label>
+            <input id="strokeColorPicker" type="color" oninput="updateTicket()" value="#020268a">
+
+            <label>Fill Color:</label>
+            <input id="fillColorPicker" type="color" oninput="updateTicket()" value="#fefeba">
+
+            <label>Ticket Width: <span id='ticket-width-span'>600</span></label>
+            <div>1<input id="ticketWidthSlider" oninput="updateTicket()" type="range" min="1" max="600" value="500">600</div>
+
+            <label>Ticket Height: <span id='ticket-height-span'>200</span></label>
+            <div>1<input id="ticketHeightSlider" oninput="updateTicket()" type="range" min="1" max="600" value="200">600</div>
+
+            <button onclick="clearTicket()">Clear Tickets</button>
+            <button onclick="addTicket()">Add Ticket</button>
+        </div>
+        <div id="visas-box"></div>
+    </div>
+    <script src="./RegioVincoTicketGenerator.js"></script>
+    <script src="./RegioVincoTicketTester.js"></script>
+</body>
+
+</html>
